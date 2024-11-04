@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 
 import { mysqlPrisma } from "@/lib/prisma";
 
-export default async function getMe(req: string) {
+export async function signinAction(req: string) {
   const test = await mysqlPrisma.user.findFirst({
     where: {
       name: "test",

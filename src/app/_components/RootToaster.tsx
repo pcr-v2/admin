@@ -22,6 +22,13 @@ export function RootToaster({
       position="top-center"
       toastOptions={{
         icon: null,
+        style: { color: "#fff", backgroundColor: "#424242" },
+        error: {
+          style: {
+            color: "#fff",
+            backgroundColor: "#f44335",
+          },
+        },
       }}
       {...props}
     />

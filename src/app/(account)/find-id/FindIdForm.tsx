@@ -1,16 +1,26 @@
 "use client";
 
 import { Box, styled } from "@mui/material";
+import bcrypt from "bcryptjs";
+import { v4 } from "uuid";
 
 import CommonButton from "@/app/_components/common/Button";
 import TextInput from "@/app/_components/common/TextInput";
 
 export default function FindIdForm() {
+  const id = v4();
+
+  console.log(" ", id);
+
+  const test = async () => {
+    const password = await bcrypt.hash("1234", 10);
+    console.log(password);
+  };
   return (
     <>
       <TopContents>
         <Text>
-          <Title>아이디 찾기</Title>
+          <Title onClick={() => test()}>아이디 찾기</Title>
           <Description>
             가입하신 이메일을 통해 인증 절차를 진행해 주세요!
           </Description>

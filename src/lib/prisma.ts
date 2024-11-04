@@ -1,18 +1,12 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient as MysqlPrismaClient } from "@prisma/client";
 
-let globalWithPrisma = global as typeof globalThis as unknown as {
-  prisma: PrismaClient;
+const globalForPrisma = globalThis as unknown as {
+  mysqlPrisma?: MysqlPrismaClient;
 };
 
-let prisma: PrismaClient;
+export const mysqlPrisma =
+  globalForPrisma.mysqlPrisma || new MysqlPrismaClient();
 
-if (process.env.NODE_ENV === "production") {
-  prisma = new PrismaClient();
-} else {
-  if (!globalWithPrisma.prisma) {
-    globalWithPrisma.prisma = new PrismaClient();
-  }
-  prisma = globalWithPrisma.prisma;
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.mysqlPrisma = mysqlPrisma;
 }
-
-export default prisma;

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
+import getMe from "@/app/(account)/signin/getMe";
 import CommonButton from "@/app/_components/common/Button";
 import PasswordInput from "@/app/_components/common/PasswordInput";
 import TextInput from "@/app/_components/common/TextInput";
@@ -15,6 +16,18 @@ export default function SigninForm() {
 
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+
+  const test = async () => {
+    const res = await getMe("234");
+
+    console.log("res", res);
+
+    if (res) {
+      toast.success("성공");
+    } else {
+      toast.error("asdf");
+    }
+  };
 
   const onChangeInput = (value: string, type: "id" | "pw") => {
     if (type === "id") {
@@ -61,7 +74,7 @@ export default function SigninForm() {
           <Divider />
           <SpanST onClick={() => router.push("/find-pw")}>비밀번호 찾기</SpanST>
         </FindBox>
-        <CommonButton variant="contained" text="로그인" onClick={handleLogin} />
+        <CommonButton variant="contained" text="로그인" onClick={test} />
         <CommonButton
           variant="outlined"
           text="회원가입"
