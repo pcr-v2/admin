@@ -19,7 +19,7 @@ export default async function middleware(req: NextRequest) {
     const accessToken = req.cookies.get(ACCESS_TOKEN_KEY);
     const refreshToken = req.cookies.get(REFRESH_TOKEN_KEY);
     if (accessToken?.value == null) {
-      return NextResponse.redirect(`http://localhost:3000/signin`);
+      return NextResponse.redirect(`${DOMAIN_URL}/signin`);
     }
     try {
       await jwtVerify(accessToken?.value, TOKEN_SECRET);
