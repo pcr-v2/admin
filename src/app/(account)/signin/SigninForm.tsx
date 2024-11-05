@@ -85,7 +85,11 @@ export default function SigninForm() {
             handleLogin({ id: signinValues.id, pw: signinValues.pw })
           }
         />
-        <CommonButton variant="outlined" text="회원가입" onClick={() => {}} />
+        <CommonButton
+          variant="outlined"
+          text="회원가입"
+          onClick={() => router.push("/signup")}
+        />
       </BottomContents>
     </>
   );
@@ -151,6 +155,7 @@ const FindBox = styled(Box)(() => {
 const SpanST = styled("span")(() => {
   return {
     fontSize: "14px",
+    cursor: "pointer",
     color: "#424242",
   };
 });
