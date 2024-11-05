@@ -12,6 +12,7 @@ export default function FindPasswordForm() {
           textAlign: "center",
           wordBreak: "keep-all",
           justifyContent: "center",
+          flexDirection: "column",
         }}
       >
         <span style={{ fontSize: "32px", fontWeight: 900 }}>비번 찾기</span>
