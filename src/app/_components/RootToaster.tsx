@@ -1,5 +1,6 @@
 "use client";
 
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useEffect } from "react";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 
@@ -21,12 +22,18 @@ export function RootToaster({
     <Toaster
       position="top-center"
       toastOptions={{
-        icon: null,
+        icon: <InfoOutlinedIcon />,
         style: { color: "#fff", backgroundColor: "#424242" },
         error: {
           style: {
             color: "#fff",
             backgroundColor: "#f44335",
+          },
+        },
+        success: {
+          style: {
+            color: "#fff",
+            backgroundColor: "#4CAF50",
           },
         },
       }}

@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-import getMe from "@/app/(account)/signin/getMe";
+import { signinAction } from "@/app/(account)/signin/_actions/signinAction";
+import { SigninRequest } from "@/app/(account)/signin/_actions/signinSchema";
 import CommonButton from "@/app/_components/common/Button";
 import PasswordInput from "@/app/_components/common/PasswordInput";
 import TextInput from "@/app/_components/common/TextInput";
@@ -14,36 +15,39 @@ import logo from "@/assets/logo/main-logo.png";
 export default function SigninForm() {
   const router = useRouter();
 
-  const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
+  const [signinValues, setSigninValues] = useState({
+    id: "",
+    pw: "",
+  });
 
-  const test = async () => {
-    const res = await getMe("234");
+  const handleLogin = async (request: SigninRequest) => {
+    if (request.id === "") {
+      return toast.error("아이디를 입력해 주세요");
+    }
+    if (request.pw === "") {
+      return toast.error("비밀번호를 입력해 주세요");
+    }
 
-    console.log("res", res);
+    const res = await signinAction(request);
 
-    if (res) {
-      toast.success("성공");
+    if (res.code === "SUCCESS") {
+      toast.success(res.message);
+      router.push("/dashboard");
+      return;
     } else {
-      toast.error("asdf");
-    }
-  };
-
-  const onChangeInput = (value: string, type: "id" | "pw") => {
-    if (type === "id") {
-      setId(value);
-      return;
-    }
-    if (type === "pw") {
-      setPw(value);
+      toast.error(res.message);
       return;
     }
   };
 
-  const handleLogin = () => {
-    console.log(id, pw);
-    if (id === "") {
-      return toast.error("아이디를 입력해주세요");
+  const onChangeInput = (value: string, inputTpye: "id" | "pw") => {
+    if (inputTpye === "id") {
+      setSigninValues({ ...signinValues, id: value });
+      return;
+    }
+    if (inputTpye === "pw") {
+      setSigninValues({ ...signinValues, pw: value });
+      return;
     }
   };
 
@@ -55,13 +59,13 @@ export default function SigninForm() {
         <Inputs>
           <TextInput
             lable="아이디"
-            value={id}
+            value={signinValues.id}
             helperText="아이디를 입력해주세요."
             onChange={(value: string) => onChangeInput(value, "id")}
           />
           <PasswordInput
             lable="비밀번호"
-            value={pw}
+            value={signinValues.pw}
             helperText="비밀번호를 입력해주세요."
             onChange={(value: string) => onChangeInput(value, "pw")}
           />
@@ -74,12 +78,14 @@ export default function SigninForm() {
           <Divider />
           <SpanST onClick={() => router.push("/find-pw")}>비밀번호 찾기</SpanST>
         </FindBox>
-        <CommonButton variant="contained" text="로그인" onClick={test} />
         <CommonButton
-          variant="outlined"
-          text="회원가입"
-          onClick={handleLogin}
+          variant="contained"
+          text="로그인"
+          onClick={() =>
+            handleLogin({ id: signinValues.id, pw: signinValues.pw })
+          }
         />
+        <CommonButton variant="outlined" text="회원가입" onClick={() => {}} />
       </BottomContents>
     </>
   );

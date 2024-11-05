@@ -12,14 +12,19 @@ export const DOMAIN_URL = process.env.NEXT_PUBLIC_DOMAIN_URL!;
 
 // export const DEFAULT_LANG = "ko";
 
-export const BA_ACCESS_TOKEN_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY;
+export const ACCESS_TOKEN_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY;
 
 export const ACCESS_TOKEN_EXPIRATION_TIME =
   process.env.NEXT_PUBLIC_ACCESS_TOKEN_EXPIRATION_TIME;
 
-export const BA_REFRESH_TOKEN_KEY = process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY;
+export const REFRESH_TOKEN_KEY = process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY;
 
 export const REFRESH_TOKEN_EXPIRATION_TIME =
   process.env.NEXT_PUBLIC_REFRESH_TOKEN_EXPIRATION_TIME;
 
-export const PUBLIC_PATHS = ["/", "/signup", "/find-id", "/find-password"];
+export const PUBLIC_PATHS = [
+  "/signin",
+  "/signup",
+  "/find-id",
+  "/find-password",
+];
