@@ -13,7 +13,7 @@ export default function FindIdForm() {
   console.log(" ", id);
 
   const test = async () => {
-    const password = await bcrypt.hash("1234", 10);
+    const password = await bcrypt.hash("123456", 10);
     console.log(password);
   };
   return (
@@ -48,7 +48,7 @@ export default function FindIdForm() {
         </Inputs>
       </TopContents>
 
-      <CommonButton variant="contained" text="다음" onClick={() => {}} />
+      <CommonButton variant="contained" text="다음" onClick={() => test()} />
     </>
   );
 }

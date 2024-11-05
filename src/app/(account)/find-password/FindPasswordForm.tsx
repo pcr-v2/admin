@@ -3,7 +3,7 @@
 import { Box, styled } from "@mui/material";
 import React from "react";
 
-export default function FindPasswordPage() {
+export default function FindPasswordForm() {
   return (
     <Wrapper>
       <Box
@@ -14,10 +14,8 @@ export default function FindPasswordPage() {
           justifyContent: "center",
         }}
       >
-        <span style={{ fontSize: "32px", fontWeight: 900 }}>아이디 찾기</span>
-        <span style={{ fontSize: "24px", fontWeight: 800 }}>
-          가입하신 이메일을 통해 인증 절차를 진행해 주세요!
-        </span>
+        <span style={{ fontSize: "32px", fontWeight: 900 }}>비번 찾기</span>
+        <span style={{ fontSize: "24px", fontWeight: 800 }}>비번찾으셈</span>
       </Box>
     </Wrapper>
   );

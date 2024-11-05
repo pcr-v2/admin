@@ -11,5 +11,5 @@ export default function DashboardPage() {
     console.log(pathName.startsWith(path));
   });
 
-  return <div>성공</div>;
+  return <div>성공 citest</div>;
 }

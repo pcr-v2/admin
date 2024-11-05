@@ -76,7 +76,9 @@ export default function SigninForm() {
         <FindBox>
           <SpanST onClick={() => router.push("/find-id")}>아이디 찾기</SpanST>
           <Divider />
-          <SpanST onClick={() => router.push("/find-pw")}>비밀번호 찾기</SpanST>
+          <SpanST onClick={() => router.push("/find-password")}>
+            비밀번호 찾기
+          </SpanST>
         </FindBox>
         <CommonButton
           variant="contained"
