@@ -2,8 +2,10 @@
 
 import { Box, styled } from "@mui/material";
 import bcrypt from "bcryptjs";
+import toast from "react-hot-toast";
 import { v4 } from "uuid";
 
+import { sendEmail } from "@/app/(account)/_actions/sendEmail";
 import CommonButton from "@/app/_components/common/Button";
 import TextInput from "@/app/_components/common/TextInput";
 
@@ -16,6 +18,18 @@ export default function FindIdForm() {
     const password = await bcrypt.hash("test1234", 10);
     console.log(password);
   };
+
+  const send = async () => {
+    const res = await sendEmail({
+      userName: "test",
+      userEmail: "qkrcjffus@naver.com",
+    });
+
+    if (res.code !== "SUCCESS") {
+      toast.error(res.message);
+    }
+  };
+
   return (
     <>
       <TopContents>
@@ -48,7 +62,7 @@ export default function FindIdForm() {
         </Inputs>
       </TopContents>
 
-      <CommonButton variant="contained" text="다음" onClick={() => test()} />
+      <CommonButton variant="contained" text="다음" onClick={() => send()} />
     </>
   );
 }
