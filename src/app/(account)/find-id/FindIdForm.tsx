@@ -13,7 +13,7 @@ export default function FindIdForm() {
   console.log(" ", id);
 
   const test = async () => {
-    const password = await bcrypt.hash("123456", 10);
+    const password = await bcrypt.hash("test1234", 10);
     console.log(password);
   };
   return (

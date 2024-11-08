@@ -41,7 +41,7 @@ export async function signinAction(
         deleted_at: null,
       },
     });
-
+    console.log("userData", userData);
     if (userData == null) {
       return {
         code: "NOT_FOUND_USER" as const,
