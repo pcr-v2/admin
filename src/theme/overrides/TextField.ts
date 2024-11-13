@@ -11,6 +11,16 @@ const MuiTextField: Components<Theme> = {
         "& .MuiInputBase-root .MuiOutlinedInput-notchedOutline": {
           border: "1px solid #212121",
         },
+        "& .MuiInputBase-input": {
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          backgroundColor: "transparent",
+        },
+
+        "& :-webkit-autofill": {
+          WebkitBoxShadow: "0 0 0 1000px white inset !important",
+          backgroundColor: "transparent !important",
+        },
 
         "& .MuiInputLabel-root": {
           top: 2,

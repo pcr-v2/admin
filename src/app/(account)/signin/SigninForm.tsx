@@ -2,11 +2,11 @@
 
 import { Box, styled } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 
-import { signinAction } from "@/app/(account)/signin/_actions/signinAction";
-import { SigninRequest } from "@/app/(account)/signin/_actions/signinSchema";
+import { signinAction } from "@/app/_actions/account/signin/signinAction";
+import { SigninRequest } from "@/app/_actions/account/signin/signinSchema";
 import CommonButton from "@/app/_components/common/Button";
 import PasswordInput from "@/app/_components/common/PasswordInput";
 import TextInput from "@/app/_components/common/TextInput";
@@ -40,12 +40,14 @@ export default function SigninForm() {
     }
   };
 
-  const onChangeInput = (value: string, inputTpye: "id" | "pw") => {
-    if (inputTpye === "id") {
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    if (name === "id") {
       setSigninValues({ ...signinValues, id: value });
       return;
     }
-    if (inputTpye === "pw") {
+    if (name === "pw") {
       setSigninValues({ ...signinValues, pw: value });
       return;
     }
@@ -58,16 +60,18 @@ export default function SigninForm() {
 
         <Inputs>
           <TextInput
-            lable="아이디"
+            label="아이디"
+            name="id"
             value={signinValues.id}
             helperText="아이디를 입력해주세요."
-            onChange={(value: string) => onChangeInput(value, "id")}
+            onChange={onChangeInput}
           />
           <PasswordInput
-            lable="비밀번호"
+            label="비밀번호"
+            name="pw"
             value={signinValues.pw}
             helperText="비밀번호를 입력해주세요."
-            onChange={(value: string) => onChangeInput(value, "pw")}
+            onChange={onChangeInput}
           />
         </Inputs>
       </TopContent>

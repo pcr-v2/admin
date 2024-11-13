@@ -1,5 +1,11 @@
 import { redirect } from "next/navigation";
 
-export default function page() {
-  throw redirect("/signin");
+import { getUser } from "@/app/_actions/account/auth/getUser";
+
+export default async function page() {
+  const res = await getUser();
+
+  if (res.data != null) {
+    return redirect("/dashboard");
+  }
 }

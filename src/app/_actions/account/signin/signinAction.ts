@@ -8,7 +8,7 @@ import {
   SigninRequest,
   signinRequestSchema,
   SigninResponse,
-} from "@/app/(account)/signin/_actions/signinSchema";
+} from "@/app/_actions/account/signin/signinSchema";
 import {
   ACCESS_TOKEN_EXPIRATION_TIME,
   ACCESS_TOKEN_KEY,

@@ -26,6 +26,7 @@ export const REFRESH_TOKEN_EXPIRATION_TIME =
   process.env.NEXT_PUBLIC_REFRESH_TOKEN_EXPIRATION_TIME;
 
 export const PUBLIC_PATHS = [
+  "/",
   "/signin",
   "/signup",
   "/find-id",

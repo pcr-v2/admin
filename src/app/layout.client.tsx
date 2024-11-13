@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, ThemeProvider, styled } from "@mui/material";
-import { ReactNode, useMemo } from "react";
+import { ReactNode } from "react";
 
 import { RootToaster } from "@/app/_components/RootToaster";
 import theme from "@/theme";
@@ -14,7 +14,6 @@ export default function RootClientLayout({ children }: RootClientLayoutProps) {
   return (
     <ThemeProvider theme={theme}>
       <ChildrenWrapper>{children}</ChildrenWrapper>
-
       <RootToaster max={3} />
     </ThemeProvider>
   );

@@ -5,16 +5,18 @@ import { styled, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 
 interface IProps {
-  lable: string;
+  label: string;
   value: string;
   helperText?: string;
   placeholder?: string;
-  onChange: (value: string) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
+  name: string;
 }
 
 export default function TextInput(props: IProps) {
-  const { lable, placeholder, onChange, value, helperText, className } = props;
+  const { label, placeholder, onChange, value, helperText, className, name } =
+    props;
 
   const [err, setErr] = useState(false);
 
@@ -31,14 +33,13 @@ export default function TextInput(props: IProps) {
       className={className}
       error={err}
       type="text"
-      label={lable}
+      label={label}
+      name={name}
       value={value}
       onBlur={validateFn}
       placeholder={placeholder}
       helperText={err ? helperText : false}
-      onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
-        onChange(e.target.value)
-      }
+      onChange={onChange}
     />
   );
 }

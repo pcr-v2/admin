@@ -23,7 +23,10 @@ export function RootToaster({
       position="top-center"
       toastOptions={{
         icon: <InfoOutlinedIcon />,
-        style: { color: "#fff", backgroundColor: "#424242" },
+        style: {
+          color: "#fff",
+          backgroundColor: "#424242",
+        },
         error: {
           style: {
             color: "#fff",

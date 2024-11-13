@@ -6,7 +6,7 @@ import {
   SendEmailRequest,
   SendEmailResponse,
   sendEmailSchema,
-} from "@/app/(account)/_actions/sendEmailSchema";
+} from "@/app/_actions/account/email/sendEmailSchema";
 import { mysqlPrisma } from "@/lib/prisma";
 
 export type EmailData = {
@@ -82,7 +82,12 @@ export async function sendEmail(
   try {
     const res = await transporter.sendMail(mailData);
     if (res.accepted.length > 0) {
-      return { code: "SUCCESS", message: "인증 번호가 전송되었습니다." };
+      return {
+        code: "SUCCESS",
+        message: "인증 번호가 전송되었습니다.",
+        randomCode: randomCode,
+        userId: checkedAvailableUser.login_id,
+      };
     } else {
       return {
         code: "SEND_EMAIL_ERROR",

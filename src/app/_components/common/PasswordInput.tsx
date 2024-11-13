@@ -5,16 +5,18 @@ import { IconButton, styled, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 
 interface IProps {
-  lable: string;
+  label: string;
   value: string;
   helperText?: string;
   placeholder?: string;
-  onChange: (value: string) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
+  name: string;
 }
 
 export default function PasswordInput(props: IProps) {
-  const { lable, placeholder, onChange, value, helperText, className } = props;
+  const { label, placeholder, onChange, value, helperText, className, name } =
+    props;
 
   const [err, setErr] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -46,14 +48,13 @@ export default function PasswordInput(props: IProps) {
       className={className}
       error={err}
       type={showPassword ? "text" : "password"}
-      label={lable}
+      label={label}
       value={value}
       onBlur={validateFn}
+      name={name}
       placeholder={placeholder}
       helperText={err ? helperText : false}
-      onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
-        onChange(e.target.value)
-      }
+      onChange={onChange}
       slotProps={{
         input: {
           endAdornment: (

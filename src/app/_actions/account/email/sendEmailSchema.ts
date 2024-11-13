@@ -11,6 +11,8 @@ export type SendEmailResponse =
   | {
       code: "SUCCESS";
       message: string;
+      randomCode?: string;
+      userId: string;
     }
   | {
       code:
