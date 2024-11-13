@@ -8,7 +8,7 @@ export type TUserInfo = {
   email: string;
   login_id: string;
   login_pw: string;
-  create_at: Date;
+  created_at: Date;
   deleted_at: Date | null;
   updated_at: Date | null;
 };

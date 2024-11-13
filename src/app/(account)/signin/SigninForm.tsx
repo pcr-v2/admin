@@ -80,8 +80,8 @@ export default function SigninForm() {
         <FindBox>
           <SpanST onClick={() => router.push("/find-id")}>아이디 찾기</SpanST>
           <Divider />
-          <SpanST onClick={() => router.push("/find-password")}>
-            비밀번호 찾기
+          <SpanST onClick={() => router.push("/reset-password")}>
+            비밀번호 변경하기
           </SpanST>
         </FindBox>
         <CommonButton

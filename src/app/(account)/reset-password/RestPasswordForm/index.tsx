@@ -6,6 +6,8 @@ import { ChangeEvent, useState, useTransition } from "react";
 import { useFormStatus } from "react-dom";
 import toast from "react-hot-toast";
 
+import CertificationInputs from "@/app/(account)/reset-password/RestPasswordForm/CertificationInputs";
+import ChangePasswordInputs from "@/app/(account)/reset-password/RestPasswordForm/ChangePasswordInputs";
 import { sendEmail } from "@/app/_actions/account/email/sendEmail";
 import Loading from "@/app/_components/Loading";
 import CommonButton from "@/app/_components/common/Button";
@@ -13,10 +15,10 @@ import EndAdormentInput from "@/app/_components/common/EndAdormentInput";
 import TextInput from "@/app/_components/common/TextInput";
 import { isEmailFormat } from "@/lib/utils";
 
-export default function FindIdForm() {
+export default function ResetPasswordForm() {
   const router = useRouter();
 
-  const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [certificationNum, setCertificationNum] = useState("");
   const [randomCode, setRandomCode] = useState("");
@@ -24,20 +26,20 @@ export default function FindIdForm() {
   const [openCertification, setOpenCertification] = useState(false);
   const [goNext, setGoNext] = useState(false);
 
-  const [userIdResult, setUserIdResult] = useState({ show: false, userId: "" });
-
   const [load, setLoad] = useState(null);
 
   const checkUserInfoAndSendEmail = async () => {
-    setLoad(true);
+    if (userId !== "" && userEmail !== "") {
+      setLoad(true);
+    }
 
-    if (userName === "") {
-      toast.error("이름을 확인해 주세요.");
+    if (userId === "") {
+      toast.error("아이디를 입력해 주세요.");
       setLoad(false);
       return;
     }
     if (userEmail === "") {
-      toast.error("이메일을 확인해 주세요.");
+      toast.error("이메일을 입력해 주세요.");
       setLoad(false);
       return;
     }
@@ -49,9 +51,9 @@ export default function FindIdForm() {
     }
 
     const res = await sendEmail({
-      userName: userName,
+      userId: userId,
       userEmail: userEmail,
-      type: "findId",
+      type: "resetPassword",
     });
 
     if (
@@ -59,7 +61,7 @@ export default function FindIdForm() {
       res.code === "NOT_FOUND_USER_NAME"
     ) {
       setLoad(false);
-      toast.error("이름이나 이메일을 다시 한 번 확인해주세요.");
+      toast.error("이름이나 아이디를 다시 한 번 확인해주세요.");
       return;
     }
 
@@ -86,8 +88,8 @@ export default function FindIdForm() {
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (name === "name") {
-      setUserName(value);
+    if (name === "id") {
+      setUserId(value);
       return;
     }
     if (name === "email") {
@@ -101,11 +103,9 @@ export default function FindIdForm() {
   };
 
   const handleBtn = () => {
-    if (userIdResult.show === false) {
-      setUserIdResult({ ...userIdResult, show: true });
-      return;
-    }
-    router.push("/signin");
+    // router.push("/signin");
+
+    alert("비번 변경 동작");
   };
 
   return (
@@ -114,64 +114,31 @@ export default function FindIdForm() {
 
       <TopContents>
         <Text>
-          <Title>아이디 찾기</Title>
-          {userIdResult.show === false ? (
+          <Title>비밀번호 변경하기</Title>
+          {goNext === false ? (
             <Description>
-              가입하신 이메일을 통해 인증 절차를 진행해 주세요!
+              가입하신 아이디를 통해 인증 절차를 진행해 주세요!
             </Description>
           ) : (
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-              <Description>가입하신 아이디는 다음과 같습니다!</Description>
-              <FindedUserId>{userIdResult.userId}</FindedUserId>
-            </Box>
+            <Description>변경하실 비밀번호를 입력해 주세요.</Description>
           )}
         </Text>
 
-        {userIdResult.show === false && (
-          <Inputs>
-            <TextInput
-              label="이름"
-              name="name"
-              value={userName}
-              helperText="이름을 입력해주세요"
-              onChange={onChangeInput}
+        <Inputs>
+          {goNext === false ? (
+            <CertificationInputs
+              userId={userId}
+              userEmail={userEmail}
+              certificationNum={certificationNum}
+              openCertification={openCertification}
+              onChangeInput={onChangeInput}
+              checkUserInfoAndSendEmail={checkUserInfoAndSendEmail}
+              handleValidateCertificationNum={handleValidateCertificationNum}
             />
-
-            <EndAdormentInput
-              label="이메일"
-              value={userEmail}
-              name="email"
-              helperText="이메일을 입력해주세요"
-              onChange={onChangeInput}
-              children={
-                <EndAdormentButton
-                  variant="contained"
-                  onClick={checkUserInfoAndSendEmail}
-                >
-                  인증요청
-                </EndAdormentButton>
-              }
-              disabled={false}
-            />
-            <EndAdormentInput
-              label="인증번호"
-              value={certificationNum}
-              name="certificationNum"
-              helperText="인증번호를 입력해 주세요."
-              onChange={onChangeInput}
-              children={
-                <EndAdormentButton
-                  variant="contained"
-                  disabled={!openCertification}
-                  onClick={handleValidateCertificationNum}
-                >
-                  확인
-                </EndAdormentButton>
-              }
-              disabled={false}
-            />
-          </Inputs>
-        )}
+          ) : (
+            <ChangePasswordInputs />
+          )}
+        </Inputs>
       </TopContents>
 
       <BottomContent>
@@ -180,14 +147,12 @@ export default function FindIdForm() {
             관리자 문의
           </SpanST>
           <Divider />
-          <SpanST onClick={() => router.push("/reset-password")}>
-            비밀번호 변경하기
-          </SpanST>
+          <SpanST onClick={() => router.push("/find-id")}>아이디 찾기</SpanST>
         </FindBox>
         <CommonButton
           disable={!goNext}
           variant="contained"
-          text={userIdResult.show ? "로그인 하기" : "다음"}
+          text={goNext ? "비밀번호 변경하기" : "다음"}
           onClick={handleBtn}
         />
       </BottomContent>

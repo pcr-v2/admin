@@ -1,19 +1,15 @@
 "use server";
 
+import { Prisma } from "@prisma/client";
 import nodemailer from "nodemailer";
 
 import {
   SendEmailRequest,
   SendEmailResponse,
   sendEmailSchema,
+  TUser,
 } from "@/app/_actions/account/email/sendEmailSchema";
 import { mysqlPrisma } from "@/lib/prisma";
-
-export type EmailData = {
-  from: string;
-  subject: string;
-  message: string;
-};
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -39,28 +35,30 @@ export async function sendEmail(
     };
   }
 
-  const checkedAvailableUser = await mysqlPrisma.user.findFirst({
-    where: {
+  let findIdWhere = {};
+  let resetPwWhere = {};
+
+  if (validated.data.type === "findId") {
+    findIdWhere = {
       name: validated.data.userName,
-    },
+      email: validated.data.userEmail,
+    };
+  }
+  if (validated.data.type === "resetPassword") {
+    resetPwWhere = {
+      login_id: validated.data.userId,
+      email: validated.data.userEmail,
+    };
+  }
+
+  const checkedUser = await mysqlPrisma.user.findFirst({
+    where: validated.data.type === "findId" ? findIdWhere : resetPwWhere,
   });
 
-  if (checkedAvailableUser == null)
+  if (checkedUser == null)
     return {
       code: "NOT_FOUND_USER_NAME",
       message: "존재하지 않는 유저 입니다.",
-    };
-
-  const checkAvailableEmail = await mysqlPrisma.user.findFirst({
-    where: {
-      email: validated.data.userEmail,
-    },
-  });
-
-  if (checkAvailableEmail == null)
-    return {
-      code: "NOT_FOUND_USER_EMAIL",
-      message: "존재하지 이메일 입니다.",
     };
 
   const randomCode = Math.floor(100000 + Math.random() * 900000).toString();
@@ -68,7 +66,7 @@ export async function sendEmail(
   const mailData = {
     to: "qkrcjffus@naver.com",
     subject: `[btb-admin 인증 번호]`,
-    from: validated.data.userEmail,
+    from: checkedUser.email,
     html: `
         <h3>btb-admin에서<br/> 인증 번호를 전송해 드렸습니다.</h3>
         
@@ -86,7 +84,7 @@ export async function sendEmail(
         code: "SUCCESS",
         message: "인증 번호가 전송되었습니다.",
         randomCode: randomCode,
-        userId: checkedAvailableUser.login_id,
+        userId: checkedUser.login_id,
       };
     } else {
       return {

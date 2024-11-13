@@ -30,5 +30,5 @@ export const PUBLIC_PATHS = [
   "/signin",
   "/signup",
   "/find-id",
-  "/find-password",
+  "/reset-password",
 ];
