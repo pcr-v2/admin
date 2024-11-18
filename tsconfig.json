@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -18,14 +22,30 @@
       },
       {
         "name": "ts-plugin-sort-import-suggestions",
-        "moveUpPatterns": ["@/", "\\.{1,2}/"],
-        "moveDownPatterns": ["dist", ".next"]
+        "moveUpPatterns": [
+          "@/",
+          "\\.{1,2}/"
+        ],
+        "moveDownPatterns": [
+          "dist",
+          ".next"
+        ]
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

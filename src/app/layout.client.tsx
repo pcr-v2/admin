@@ -4,6 +4,7 @@ import { Box, ThemeProvider, styled } from "@mui/material";
 import { ReactNode } from "react";
 
 import { RootToaster } from "@/app/_components/RootToaster";
+import SocketProvider from "@/app/_components/SocketProvider";
 import theme from "@/theme";
 
 export type RootClientLayoutProps = {
@@ -12,10 +13,12 @@ export type RootClientLayoutProps = {
 
 export default function RootClientLayout({ children }: RootClientLayoutProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <ChildrenWrapper>{children}</ChildrenWrapper>
-      <RootToaster max={3} />
-    </ThemeProvider>
+    <SocketProvider>
+      <ThemeProvider theme={theme}>
+        <ChildrenWrapper>{children}</ChildrenWrapper>
+        <RootToaster max={3} />
+      </ThemeProvider>
+    </SocketProvider>
   );
 }
 

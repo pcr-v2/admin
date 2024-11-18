@@ -31,7 +31,7 @@ export default function SigninForm() {
     const res = await signinAction(request);
 
     if (res.code === "SUCCESS") {
-      toast.success(res.message);
+      toast.success(res.message as string);
       router.push("/dashboard");
       return;
     } else {

@@ -1,15 +1,12 @@
-"use client";
-
 import { usePathname } from "next/navigation";
 import React from "react";
 
+import Dashboard from "@/app/(main)/dashboard/Dashboard";
+import { getUser } from "@/app/_actions/account/auth/getUser";
 import { PUBLIC_PATHS } from "@/config/config";
 
-export default function DashboardPage() {
-  const pathName = usePathname();
-  PUBLIC_PATHS.some((path) => {
-    console.log(pathName.startsWith(path));
-  });
+export default async function DashboardPage() {
+  const res = await getUser();
 
-  return <div>성공 citest</div>;
+  return <>{res.code === "SUCCESS" && <Dashboard res={res} />}</>;
 }
