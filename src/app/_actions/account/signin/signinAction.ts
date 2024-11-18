@@ -41,6 +41,8 @@ export async function signinAction(
         deleted_at: null,
       },
     });
+
+    console.log("userData", userData);
     if (userData == null) {
       return {
         code: "NOT_FOUND_USER" as const,
@@ -64,6 +66,8 @@ export async function signinAction(
       sub: `btb-admin-${userData.email}`,
       uid: userData.id,
     };
+
+    console.log("payload", payload);
     const accessToken = await new SignJWT(payload)
       .setProtectedHeader({ alg: "HS256", typ: "JWT" })
       .setIssuedAt()
