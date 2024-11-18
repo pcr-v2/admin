@@ -65,13 +65,10 @@ export default function SocketProvider(props: IProps) {
   }, [socket]);
 
   useEffect(() => {
-    const socketInstance: TSocket = ClientIO(
-      "https://btb-admin.vercel.app:3000",
-      {
-        path: "/api/socket/io",
-        addTrailingSlash: false,
-      },
-    );
+    const socketInstance: TSocket = ClientIO("https://btb-admin.vercel.app", {
+      path: "/api/socket/io",
+      addTrailingSlash: false,
+    });
 
     socketInstance.on("connect", () => setIsConnected(true));
     socketInstance.on("disconnect", () => setIsConnected(false));
