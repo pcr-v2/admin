@@ -30,7 +30,7 @@ export default function ResetPasswordForm() {
   const [openCertification, setOpenCertification] = useState(false);
   const [goNext, setGoNext] = useState(false);
 
-  const [load, setLoad] = useState(null);
+  const [load, setLoad] = useState<boolean | null>(null);
 
   const checkUserInfoAndSendEmail = async () => {
     if (userId !== "" && userEmail !== "") {
@@ -76,7 +76,7 @@ export default function ResetPasswordForm() {
     }
     setLoad(false);
     toast.success("인증번호가 전송 되었습니다.");
-    setRandomCode(res.randomCode);
+    setRandomCode(res.randomCode as string);
     setOpenCertification(true);
   };
 
@@ -132,13 +132,13 @@ export default function ResetPasswordForm() {
       toast.error(res.message);
     }
 
-    toast.success(res.message);
+    toast.success(res.message as string);
     router.push("/signin");
   };
 
   return (
     <>
-      <Loading loading={load} />
+      <Loading loading={load ?? false} />
 
       <TopContents>
         <Text>

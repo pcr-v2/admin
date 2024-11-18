@@ -14,7 +14,7 @@ import { mysqlPrisma } from "@/lib/prisma";
 
 // react/cache 생명주기: 렌더링 과정에서 여러 서버 컴포넌트에서 부를 때, 한 요청 끝나면 캐시 사라짐
 export const getUser = cache(async (): Promise<GetUserResponse> => {
-  const accessToken = cookies().get(ACCESS_TOKEN_KEY);
+  const accessToken = cookies().get(ACCESS_TOKEN_KEY!!);
 
   if (accessToken == null) {
     throw redirect("/signin");

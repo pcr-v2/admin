@@ -67,17 +67,17 @@ export async function signinAction(
     const accessToken = await new SignJWT(payload)
       .setProtectedHeader({ alg: "HS256", typ: "JWT" })
       .setIssuedAt()
-      .setExpirationTime(ACCESS_TOKEN_EXPIRATION_TIME)
+      .setExpirationTime(ACCESS_TOKEN_EXPIRATION_TIME!!)
       .sign(TOKEN_SECRET);
 
     const refreshToken = await new SignJWT(payload)
       .setProtectedHeader({ alg: "HS256", typ: "JWT" })
       .setIssuedAt()
-      .setExpirationTime(REFRESH_TOKEN_EXPIRATION_TIME)
+      .setExpirationTime(REFRESH_TOKEN_EXPIRATION_TIME!!)
       .sign(TOKEN_SECRET);
 
-    cookies().set(ACCESS_TOKEN_KEY, accessToken);
-    cookies().set(REFRESH_TOKEN_KEY, refreshToken);
+    cookies().set(ACCESS_TOKEN_KEY!!, accessToken);
+    cookies().set(REFRESH_TOKEN_KEY!!, refreshToken);
 
     return {
       code: "SUCCESS",
