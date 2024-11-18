@@ -9,9 +9,11 @@ interface IProps {
 export default function Loading(props: IProps) {
   const { loading = false } = props;
 
+  if (loading == null) return;
+
   return (
     <Wrapper
-      open={String(loading)}
+      openloading={String(loading)}
       sx={(theme) => ({ color: "#3196ff", zIndex: theme.zIndex.drawer + 1 })}
     >
       {loading && <CircularProgress color="inherit" sx={{}} />}
@@ -19,7 +21,7 @@ export default function Loading(props: IProps) {
   );
 }
 
-const Wrapper = styled(Box)<{ open: string }>(({ open }) => {
+const Wrapper = styled(Box)<{ openloading: string }>(({ openloading }) => {
   return {
     inset: 0,
     zIndex: 1,
@@ -30,6 +32,6 @@ const Wrapper = styled(Box)<{ open: string }>(({ open }) => {
     justifyContent: "center",
     backdropFilter: "blur(1px)",
     backgroundColor: "rgba(0, 0, 0, 0.10)",
-    display: open === "true" ? "flex" : "none",
+    display: openloading === "true" ? "flex" : "none",
   };
 });

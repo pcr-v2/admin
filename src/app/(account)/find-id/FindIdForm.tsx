@@ -71,6 +71,7 @@ export default function FindIdForm() {
     setLoad(false);
     toast.success("인증번호가 전송 되었습니다.");
     setRandomCode(res.randomCode);
+    setUserIdResult({ ...userIdResult, userId: res.userId });
     setOpenCertification(true);
   };
 
@@ -107,7 +108,6 @@ export default function FindIdForm() {
     }
     router.push("/signin");
   };
-
   return (
     <>
       <Loading loading={load} />

@@ -1,27 +1,44 @@
 "use client";
 
+import { Box, styled } from "@mui/material";
+import { ChangeEvent } from "react";
+
 import PasswordInput from "@/app/_components/common/PasswordInput";
 
-interface IProps {}
+interface IProps {
+  pw: string;
+  pwCheck: string;
+  onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+}
 
 export default function ChangePasswordInputs(props: IProps) {
-  const {} = props;
+  const { pw, pwCheck, onChangeInput } = props;
+
   return (
-    <>
+    <Wrapper>
       <PasswordInput
         label="비밀번호"
         name="pw"
-        value={""}
+        value={pw}
         helperText="비밀번호를 입력해주세요."
-        onChange={() => {}}
+        onChange={onChangeInput}
       />
       <PasswordInput
         label="비밀번호 확인"
-        name="pw"
-        value={""}
-        helperText="비밀번호를 한번 더 입력해주세요."
-        onChange={() => {}}
+        name="pwCheck"
+        value={pwCheck}
+        helperText="비밀번호 확인을 입력해주세요."
+        onChange={onChangeInput}
       />
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled(Box)(() => {
+  return {
+    gap: "24px",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+  };
+});

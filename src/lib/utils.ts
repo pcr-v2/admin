@@ -20,8 +20,7 @@ export const isEmailFormat = (email: string) => {
 export const isPasswordFormat = (password: string) => {
   if (password == null || password.length <= 0) return false;
 
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z]?)(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,12}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*\d)[a-zA-Z\d\W]{6,12}$/;
 
   return passwordRegex.test(password);
 };

@@ -1,19 +1,20 @@
 "use client";
 
 import { Box, Button, styled } from "@mui/material";
+import bcrypt from "bcryptjs";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState, useTransition } from "react";
-import { useFormStatus } from "react-dom";
 import toast from "react-hot-toast";
 
 import CertificationInputs from "@/app/(account)/reset-password/RestPasswordForm/CertificationInputs";
 import ChangePasswordInputs from "@/app/(account)/reset-password/RestPasswordForm/ChangePasswordInputs";
 import { sendEmail } from "@/app/_actions/account/email/sendEmail";
+import { resetPassword } from "@/app/_actions/account/resetPassword/resetPasswordAction";
 import Loading from "@/app/_components/Loading";
 import CommonButton from "@/app/_components/common/Button";
 import EndAdormentInput from "@/app/_components/common/EndAdormentInput";
 import TextInput from "@/app/_components/common/TextInput";
-import { isEmailFormat } from "@/lib/utils";
+import { isEmailFormat, isPasswordFormat } from "@/lib/utils";
 
 export default function ResetPasswordForm() {
   const router = useRouter();
@@ -22,6 +23,9 @@ export default function ResetPasswordForm() {
   const [userEmail, setUserEmail] = useState("");
   const [certificationNum, setCertificationNum] = useState("");
   const [randomCode, setRandomCode] = useState("");
+
+  const [pw, setPw] = useState("");
+  const [pwCheck, setPwCheck] = useState("");
 
   const [openCertification, setOpenCertification] = useState(false);
   const [goNext, setGoNext] = useState(false);
@@ -100,12 +104,36 @@ export default function ResetPasswordForm() {
       setCertificationNum(value);
       return;
     }
+
+    if (name === "pw") {
+      setPw(value);
+      return;
+    }
+    if (name === "pwCheck") {
+      setPwCheck(value);
+      return;
+    }
   };
 
-  const handleBtn = () => {
-    // router.push("/signin");
+  const handleBtn = async () => {
+    if (pw !== pwCheck) {
+      toast.error("비밀번호가 일치하지 않습니다.");
+      return;
+    }
 
-    alert("비번 변경 동작");
+    const res = await resetPassword({
+      userId,
+      userEmail,
+      pw,
+      pwCheck,
+    });
+
+    if (res.code !== "SUCCESS") {
+      toast.error(res.message);
+    }
+
+    toast.success(res.message);
+    router.push("/signin");
   };
 
   return (
@@ -136,7 +164,11 @@ export default function ResetPasswordForm() {
               handleValidateCertificationNum={handleValidateCertificationNum}
             />
           ) : (
-            <ChangePasswordInputs />
+            <ChangePasswordInputs
+              pw={pw}
+              pwCheck={pwCheck}
+              onChangeInput={onChangeInput}
+            />
           )}
         </Inputs>
       </TopContents>
