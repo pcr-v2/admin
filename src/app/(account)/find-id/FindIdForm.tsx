@@ -26,7 +26,7 @@ export default function FindIdForm() {
 
   const [userIdResult, setUserIdResult] = useState({ show: false, userId: "" });
 
-  const [load, setLoad] = useState(null);
+  const [load, setLoad] = useState<boolean | null>(null);
 
   const checkUserInfoAndSendEmail = async () => {
     setLoad(true);
@@ -70,7 +70,7 @@ export default function FindIdForm() {
     }
     setLoad(false);
     toast.success("인증번호가 전송 되었습니다.");
-    setRandomCode(res.randomCode);
+    setRandomCode(res.randomCode as string);
     setUserIdResult({ ...userIdResult, userId: res.userId });
     setOpenCertification(true);
   };
@@ -110,7 +110,7 @@ export default function FindIdForm() {
   };
   return (
     <>
-      <Loading loading={load} />
+      <Loading loading={load ?? false} />
 
       <TopContents>
         <Text>
