@@ -26,7 +26,6 @@ const ChildrenWrapper = styled(Box)(() => {
   return {
     width: "100%",
     display: "flex",
-    padding: "0px 24px",
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "center",

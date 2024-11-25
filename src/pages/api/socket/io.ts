@@ -24,6 +24,10 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
     const io = new ServerIO(httpServer, {
       path: path,
       addTrailingSlash: false,
+      cors: {
+        origin: "http://192.168.3.20:2024", // 클라이언트의 URL
+        credentials: true, // 쿠키 공유 위함
+      },
     });
     res.socket.server.io = io;
   }

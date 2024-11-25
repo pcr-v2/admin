@@ -65,7 +65,7 @@ export default function SocketProvider(props: IProps) {
   }, [socket]);
 
   useEffect(() => {
-    const socketInstance: TSocket = ClientIO("https://btb-admin.vercel.app", {
+    const socketInstance: TSocket = ClientIO("http://192.168.3.20:2024", {
       path: "/api/socket/io",
       addTrailingSlash: false,
     });

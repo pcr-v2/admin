@@ -1,29 +1,10 @@
-export const DOMAIN_URL =
-  process.env.NODE_ENV === "development"
-    ? process.env.NEXT_PUBLIC_LOCAL_URL!
-    : process.env.NEXT_PUBLIC_DOMAIN_URL!;
+export const DOMAIN_URL = process.env.NEXT_PUBLIC_LOCAL_URL!;
 
-// export const COMMON_API_URL = process.env.NEXT_PUBLIC_COMMON_API_URL!;
+export const ACCESS_TOKEN_KEY = "BA_ACCESS_TOKEN";
+export const REFRESH_TOKEN_KEY = "BA_REFRESH_TOKEN";
 
-// export const AI_SKETCH_API_URL = process.env.NEXT_PUBLIC_AI_SKETCH_API_URL;
-
-// export const AI_PPT_API_URL = process.env.NEXT_PUBLIC_AI_PPT_API_URL;
-
-// export const LANG_COOKIE_KEY = "SCHOOL_TEACHER_LANG";
-
-// export const LANGS = ["ko" as const, "en" as const];
-
-// export const DEFAULT_LANG = "ko";
-
-export const ACCESS_TOKEN_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY;
-
-export const ACCESS_TOKEN_EXPIRATION_TIME =
-  process.env.NEXT_PUBLIC_ACCESS_TOKEN_EXPIRATION_TIME;
-
-export const REFRESH_TOKEN_KEY = process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY;
-
-export const REFRESH_TOKEN_EXPIRATION_TIME =
-  process.env.NEXT_PUBLIC_REFRESH_TOKEN_EXPIRATION_TIME;
+export const ACCESS_TOKEN_EXPIRATION_TIME = "1h";
+export const REFRESH_TOKEN_EXPIRATION_TIME = "1d";
 
 export const PUBLIC_PATHS = [
   "/",
