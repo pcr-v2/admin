@@ -28,7 +28,11 @@ export default function Chat(props: IProps) {
   const [userName, setUserName] = useState("");
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      messagesEndRef.current?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 0);
   };
 
   useEffect(() => {
@@ -41,8 +45,8 @@ export default function Chat(props: IProps) {
     const handleMessage = async (data: IMessage) => {
       console.log("data ", data);
       setMessages((prevMessages) => [...prevMessages, data]);
-      scrollToBottom();
     };
+    scrollToBottom();
 
     socket?.on("message", handleMessage);
     return () => {
@@ -122,7 +126,7 @@ export default function Chat(props: IProps) {
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef}></div>
+        <div ref={messagesEndRef} />
       </Box>
       <div
         style={{
