@@ -2,15 +2,15 @@
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Box, Button, styled } from "@mui/material";
-import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 // 로케일 설정
 import { GetUserResponse } from "@/app/_actions/account/auth/getUserSchema";
 import Calendar from "@/app/_components/common/Calendar";
 import { SIDE_MENUS } from "@/config/Menus";
+import dayjs from "@/lib/dayjs";
 
 // 한글 로케일 가져오기
 
@@ -28,11 +28,10 @@ export default function Header(props: IProps) {
   ).find((child) => child.path === pathName)?.name;
 
   const [time, setTime] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(dayjs().format("YYYY-MM-DD-(dd)-HH:mm:ss"));
+      setTime(dayjs().format("YYYY/MM/DD(dd) HH:mm:ss"));
     }, 1000);
     return () => clearInterval(interval);
   }, [time]);
@@ -48,24 +47,6 @@ export default function Header(props: IProps) {
           <Avatar />
         </UserInfo>
       </TopContent>
-
-      <BottomContent>
-        <span>기간</span>
-
-        <CalendarBox>
-          <Calendar
-            selectedDate={selectedDate}
-            onChangeDate={(value: Date) => setSelectedDate(value)}
-          />
-          <Divider />
-          <Calendar
-            selectedDate={selectedDate}
-            onChangeDate={(value: Date) => setSelectedDate(value)}
-          />
-        </CalendarBox>
-
-        <ConfirmBtn variant="contained">확인</ConfirmBtn>
-      </BottomContent>
     </Wrapper>
   );
 }
@@ -73,15 +54,13 @@ export default function Header(props: IProps) {
 const Wrapper = styled(Box)(() => {
   return {
     top: 0,
-    zIndex: 1,
-    gap: "12px",
+    zIndex: 2,
     width: "100%",
     display: "flex",
     position: "sticky",
-    padding: "24px 32px",
+    padding: "24px 32px 0px",
     flexDirection: "column",
     backgroundColor: "#fff",
-    borderBottom: "1px solid #bcbcbc",
   };
 });
 

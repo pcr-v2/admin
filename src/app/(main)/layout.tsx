@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 import { getUser } from "@/app/_actions/account/auth/getUser";
 import Header from "@/app/_components/MainLayout/Header";
+import PageContainer from "@/app/_components/MainLayout/PageContainer";
 import SideBar from "@/app/_components/MainLayout/SideBar";
 
 export default async function layout({ children }: { children: ReactNode }) {
@@ -27,6 +28,7 @@ export default async function layout({ children }: { children: ReactNode }) {
         }}
       >
         <Header res={res} />
+
         {children}
       </div>
     </div>

@@ -37,6 +37,7 @@ export const getUser = cache(async (): Promise<GetUserResponse> => {
         type: true,
         login_id: true,
         created_at: true,
+        profile_img: true,
       },
     });
 

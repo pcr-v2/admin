@@ -9,6 +9,7 @@ export type TUser = {
   email: string;
   phone_no: string;
   type: string;
+  profile_img: string;
   login_id: string;
   created_at: Date;
 };

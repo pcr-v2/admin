@@ -1,7 +1,10 @@
-"use client";
-
-import React from "react";
+import TrashCan from "@/app/(main)/trashcan/TrashCan";
+import PageContainer from "@/app/_components/MainLayout/PageContainer";
 
 export default function TrashCanPage() {
-  return <div>휴지통페이지</div>;
+  return (
+    <PageContainer>
+      <TrashCan />
+    </PageContainer>
+  );
 }

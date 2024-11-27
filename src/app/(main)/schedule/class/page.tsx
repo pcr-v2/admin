@@ -1,7 +1,10 @@
-"use client";
-
-import React from "react";
+import Class from "@/app/(main)/schedule/class/Class";
+import PageContainer from "@/app/_components/MainLayout/PageContainer";
 
 export default function ScheduleClassPage() {
-  return <div>수업 일정 페이지</div>;
+  return (
+    <PageContainer>
+      <Class />
+    </PageContainer>
+  );
 }

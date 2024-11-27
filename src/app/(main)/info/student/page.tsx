@@ -1,7 +1,10 @@
-"use client";
-
-import React from "react";
+import Student from "@/app/(main)/info/student/Student";
+import PageContainer from "@/app/_components/MainLayout/PageContainer";
 
 export default function InfoStudentPage() {
-  return <div>학생 정보 관리 페이지</div>;
+  return (
+    <PageContainer>
+      <Student />
+    </PageContainer>
+  );
 }

@@ -1,7 +1,10 @@
-"use client";
-
-import React from "react";
+import Subject from "@/app/(main)/info/subject/Subject";
+import PageContainer from "@/app/_components/MainLayout/PageContainer";
 
 export default function InfoSubjectPage() {
-  return <div>과목 관리 페이지</div>;
+  return (
+    <PageContainer>
+      <Subject />
+    </PageContainer>
+  );
 }

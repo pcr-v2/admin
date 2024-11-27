@@ -1,7 +1,10 @@
-"use client";
-
-import React from "react";
+import Teacher from "@/app/(main)/info/teacher/Teacher";
+import PageContainer from "@/app/_components/MainLayout/PageContainer";
 
 export default function InfoTeacher() {
-  return <div>선생님 관리 페이지</div>;
+  return (
+    <PageContainer>
+      <Teacher />
+    </PageContainer>
+  );
 }

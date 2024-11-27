@@ -1,7 +1,10 @@
-"use client";
-
-import React from "react";
+import Attendance from "@/app/(main)/schedule/attendance/Attendance";
+import PageContainer from "@/app/_components/MainLayout/PageContainer";
 
 export default function ScheduleAttendancePage() {
-  return <div>출결 관리 페이지</div>;
+  return (
+    <PageContainer>
+      <Attendance />
+    </PageContainer>
+  );
 }

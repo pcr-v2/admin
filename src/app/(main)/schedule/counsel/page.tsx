@@ -1,7 +1,10 @@
-"use client";
-
-import React from "react";
+import Counsel from "@/app/(main)/schedule/counsel/Counsel";
+import PageContainer from "@/app/_components/MainLayout/PageContainer";
 
 export default function ScheduleCounselPage() {
-  return <div>상담 일정 페이지</div>;
+  return (
+    <PageContainer>
+      <Counsel />
+    </PageContainer>
+  );
 }
