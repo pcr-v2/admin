@@ -24,9 +24,9 @@ const MuiTextField: Components<Theme> = {
 
         "& .MuiInputLabel-root": {
           top: 2,
-          fontWeight: 700,
+          fontWeight: 500,
           fontSize: "16px",
-          fontFamily: "line",
+          fontFamily: "suit",
         },
 
         "& .MuiInputBase-root": {
@@ -42,7 +42,7 @@ const MuiTextField: Components<Theme> = {
           fontSize: 16,
 
           fontWeight: 600,
-          fontFamily: "line",
+          fontFamily: "suit",
         },
 
         "& label.Mui-focused": {
@@ -50,7 +50,7 @@ const MuiTextField: Components<Theme> = {
           fontSize: 16,
           color: "#3196ff",
           fontWeight: 600,
-          fontFamily: "line",
+          fontFamily: "suit",
         },
 
         "& .MuiOutlinedInput-root": {
@@ -68,10 +68,10 @@ const MuiTextField: Components<Theme> = {
         },
 
         "& .MuiFormHelperText-root": {
-          fontWeight: 700,
+          fontWeight: 500,
           fontSize: "12px",
           color: "#f44335",
-          fontFamily: "line",
+          fontFamily: "suit",
           margin: "4px 0px 0px 4px",
         },
       }),

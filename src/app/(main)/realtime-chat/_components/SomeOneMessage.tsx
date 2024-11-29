@@ -1,30 +1,56 @@
+"use client";
+
 import { Box, styled } from "@mui/material";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 interface IProps {
   content: string;
   userName: string;
   profileImg?: string;
+  msgId: number;
 }
 
 export default function SomeOneMessage(props: IProps) {
-  const { content, userName, profileImg } = props;
+  const { content, userName, profileImg, msgId } = props;
+
+  const [hoveredMessageId, setHoveredMessageId] = useState<number | null>(null);
+
   return (
-    <Wrapper>
+    <Wrapper
+      onHoverStart={() => setHoveredMessageId(msgId)}
+      onHoverEnd={() => setHoveredMessageId(null)}
+    >
       <ProfileImg src={profileImg} alt="profile" />
 
       <Contents>
         <UserName>{userName}</UserName>
         <Message>{content}</Message>
       </Contents>
+
+      {hoveredMessageId === msgId && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            right: -20,
+            width: "20px",
+            height: "40px",
+            border: "1px solid red",
+          }}
+        />
+      )}
     </Wrapper>
   );
 }
 
-const Wrapper = styled(Box)(() => {
+const Wrapper = styled(motion.div)(() => {
   return {
+    zIndex: 1,
     gap: "12px",
     display: "flex",
     alignItems: "start",
+    position: "relative",
   };
 });
 

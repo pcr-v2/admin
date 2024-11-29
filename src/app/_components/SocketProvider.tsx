@@ -63,7 +63,7 @@ export default function SocketProvider(props: IProps) {
   }>({ userName: "", profileImg: "" });
 
   const onUserJoin = (userInfo: { userName: string; profileImg: string }) => {
-    console.log("Previous connectedUsers:", connectedUsers);
+    // console.log("Previous connectedUsers:", connectedUsers);
     setConnectedUsers(userInfo);
   };
 

@@ -152,7 +152,7 @@ const ParentMenu = styled(motion.div)(() => {
 const ParentName = styled(Box)(() => {
   return {
     width: "100%",
-    fontWeight: 700,
+    fontWeight: 500,
     display: "flex",
     fontSize: "24px",
     color: "#616161",

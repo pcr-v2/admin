@@ -1,6 +1,6 @@
 import { jwtVerify, SignJWT } from "jose";
 import { JWTExpired } from "jose/errors";
-import { MiddlewareConfig, NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import {
   ACCESS_TOKEN_EXPIRATION_TIME,
@@ -16,8 +16,8 @@ export default async function middleware(req: NextRequest) {
   const pathName = req.nextUrl.pathname;
   const isPublic = PUBLIC_PATHS.some((path) => pathName.startsWith(path));
   if (!isPublic) {
-    const accessToken = req.cookies.get(ACCESS_TOKEN_KEY);
-    const refreshToken = req.cookies.get(REFRESH_TOKEN_KEY);
+    const accessToken = req.cookies.get(ACCESS_TOKEN_KEY) || null;
+    const refreshToken = req.cookies.get(REFRESH_TOKEN_KEY) || null;
     if (accessToken?.value == null) {
       return NextResponse.redirect(`${DOMAIN_URL}/signin`);
     }
@@ -55,7 +55,7 @@ export default async function middleware(req: NextRequest) {
   return NextResponse.next({ request: req });
 }
 
-export const config: MiddlewareConfig = {
+export const config = {
   matcher: [
     "/((?!_next/static|_next/image|favicon.ico|signin|site.webmanifest|favicon/|v2/alive).*)",
     "/((?!ws$).*)",

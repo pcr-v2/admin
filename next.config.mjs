@@ -17,7 +17,7 @@ const nextConfig = {
       dependency: imageLoaderRule.dependency,
       resourceQuery: imageLoaderRule.resourceQuery,
       use: [
-        // { loader: "@svgr/webpack" },
+        { loader: "@svgr/webpack" },
         { loader: "next-image-loader", options: imageLoaderRule.options },
       ],
     });

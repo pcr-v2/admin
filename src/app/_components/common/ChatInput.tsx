@@ -1,7 +1,9 @@
 "use client";
 
-import { styled, TextField } from "@mui/material";
+import { InputAdornment, styled, TextField } from "@mui/material";
 import { ChangeEvent, ReactNode } from "react";
+
+import { mappingEmoji } from "@/lib/utils";
 
 interface IProps {
   label: string;
@@ -26,6 +28,13 @@ export default function ChatInput(props: IProps) {
     name,
   } = props;
 
+  const getSafeHtml = (text: string) => {
+    // 텍스트에서 이모지를 HTML로 변환 (mappingEmoji 함수 사용)
+    console.log("text", text);
+
+    return mappingEmoji(text);
+  };
+
   return (
     <ExtendTextField
       disabled={disabled}
@@ -36,6 +45,7 @@ export default function ChatInput(props: IProps) {
       value={value}
       placeholder={placeholder}
       onChange={onChange}
+      // dangerouslySetInnerHTML={{__html:getSafeHtml(valu)}}
       slotProps={{
         input: {
           endAdornment: <>{children}</>,
@@ -54,7 +64,10 @@ const ExtendTextField = styled(TextField)<{ disabled }>(({ disabled }) => {
       border: "1px solid #eee",
       borderRadius: "32px",
 
-      ":hover": {
+      "& :hover": {
+        border: "1px solid #eee",
+      },
+      "&:hover": {
         border: "1px solid #eee",
       },
     },

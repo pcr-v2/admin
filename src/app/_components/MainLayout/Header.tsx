@@ -44,7 +44,7 @@ export default function Header(props: IProps) {
         <UserInfo>
           <span style={{ width: "240px" }}>{time}</span>
           <span>{res.data.name}님 반가워요</span>
-          <Avatar />
+          <UserProfileImg src={res.data.profile_img} alt="profile" />
         </UserInfo>
       </TopContent>
     </Wrapper>
@@ -90,43 +90,11 @@ const UserInfo = styled(Box)(() => {
   };
 });
 
-const Avatar = styled(AccountCircleIcon)(() => {
+const UserProfileImg = styled("img")(() => {
   return {
     width: "48px",
     height: "48px",
-    color: "#d2d2d2",
-  };
-});
-
-const Divider = styled(Box)(() => {
-  return {
-    width: "12px",
-    height: "1px",
-    backgroundColor: "#bcbcbc",
-  };
-});
-
-const BottomContent = styled(Box)(() => {
-  return {
-    gap: "32px",
-    display: "flex",
-    color: "#616161",
-    alignItems: "center",
-  };
-});
-
-const ConfirmBtn = styled(Button)(() => {
-  return {
-    fontSize: "12px",
-    padding: "4px 12px",
-    borderRadius: "8px",
-  };
-});
-
-const CalendarBox = styled(Box)(() => {
-  return {
-    gap: "12px",
-    display: "flex",
-    alignItems: "center",
+    objectFit: "cover",
+    borderRadius: "100%",
   };
 });

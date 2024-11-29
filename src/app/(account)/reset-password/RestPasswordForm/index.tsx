@@ -248,7 +248,7 @@ const Inputs = styled(Box)(() => {
 
 const EndAdormentButton = styled(Button)(() => {
   return {
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: "12px",
     paddin: "8px 10px",
     borderRadius: "8px",
